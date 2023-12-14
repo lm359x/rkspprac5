@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload</title>
+</head>
+<body>
+<h1>File Upload</h1>
+
+<form action="http://127.0.0.1:80/files/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="file">
+  <button type="submit">Upload</button>
+</form>
+
+<h2>Uploaded files:</h2>
+<ul id="fileList"></ul>
+
+<script>
+  // Загрузите список файлов с сервера и отобразите его
+  fetch('http://127.0.0.1:80/files')
+          .then(response => response.json())
+          .then(files => {
+            const fileList = document.getElementById('fileList');
+
+            files.forEach(file => {
+              const li = document.createElement('li');
+              const a = document.createElement('a');
+              a.href = file.url;
+              a.textContent = `${file.name} (${file.date})`;
+              li.appendChild(a);
+              fileList.appendChild(li);
+            });
+          });
+</script>
+</body>
+</html>

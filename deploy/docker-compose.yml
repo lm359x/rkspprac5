@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  app1:
+    image: rkspprac5
+#    ports:
+#      - "8080:8080"
+    restart: on-failure
+    environment:
+      - NAME_APP=app1
+    volumes:
+      - ./upload-files:/upload-files
+  app2:
+    image: rkspprac5
+#    ports:
+#      - "8080:8080"
+    restart: on-failure
+    environment:
+      - NAME_APP=app2
+    volumes:
+      - ./upload-files:/upload-files
+  app3:
+    image: rkspprac5
+#    ports:
+#      - "8080:8080"
+    restart: on-failure
+    environment:
+      - NAME_APP=app3
+    volumes:
+      - ./upload-files:/upload-files
+  app4:
+    image: rkspprac5
+#    ports:
+#      - "8080:8080"
+    restart: on-failure
+    environment:
+      - NAME_APP=app1
+    volumes:
+      - ./upload-files:/upload-files
+  proxy:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
